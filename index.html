@@ -1,1 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Essential meta tags for character set and mobile responsiveness -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Sahayak: Your AI Helper✨</title>
+
+    <!-- Google Fonts: Outfit for content and Noto Sans for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Material Icons for the mode toggle button and popular section icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Pure CSS Styles -->
+    <style>
+        body {
+            /* Use CSS variables for easy mode switching */
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-text-color: #333333; /* Darker grey for body text contrast in Light Mode */
+            --border-color: #E0E0E0; /* Light grey border */
+            --subtle-bg-color: #F8F8F8; /* Very light grey for card backgrounds */
+            --filled-button-bg: var(--text-color);
+            --filled-button-text: var(--bg-color);
+
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            /* Smooth color transition when toggling modes */
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        
+        /* DARK MODE STYLES */
+        body.dark-mode {
+            --bg-color: #000000;
+            --text-color: #FFFFFF;
+            --secondary-text-color: #AAAAAA; /* Light grey for body text contrast in Dark Mode */
+            --border-color: #333333; /* Dark grey border */
+            --subtle-bg-color: #111111; /* Very dark grey for card backgrounds */
+        }
+
+        h1 {
+            /* Use Noto Sans for headings */
+            font-family: 'Noto Sans', sans-serif;
+            color: var(--text-color);
+            font-size: 3em; /* Larger for hero */
+            margin-bottom: 20px;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        h2 {
+            font-family: 'Noto Sans', sans-serif;
+            color: var(--text-color);
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        p {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1em;
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+            transition: color 0.3s;
+        }
+        
+        /* Small descriptive text in Outfit font */
+        .description-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9em;
+            color: var(--secondary-text-color);
+            line-height: 1.4;
+            margin-top: 5px;
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 80px 40px;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 1. NAVIGATION BAR STYLES */
+        #navbar {
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, border-color 0.3s;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.5em;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex; /* Allows inline alignment of logo image and text */
+            align-items: center;
+            gap: 10px; /* Spacing between the logo image and text */
+        }
+
+        .logo-img {
+            height: 30px; /* Adjusted height for better vertical alignment in the nav bar */
+            width: auto;
+        }
+        
+        /* Logo Visibility Control */
+        /* Default (Light Mode): Show logo-dark, Hide logo-light */
+        #logo-light {
+            display: none;
+        }
+        #logo-dark {
+            display: block;
+        }
+
+        /* Dark Mode: Show logo-light, Hide logo-dark */
+        body.dark-mode #logo-light {
+            display: block;
+        }
+        body.dark-mode #logo-dark {
+            display: none;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between the two buttons */
+        }
+        
+        /* AUTH BUTTON STYLES (Filled/Inverse Color) */
+        #auth-button {
+            background-color: var(--filled-button-bg); 
+            color: var(--filled-button-text); 
+            border: 1px solid var(--text-color); 
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s, background-color 0.3s, color 0.3s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        #auth-button:hover {
+            opacity: 0.85; /* Slight opacity change on hover */
+        }
+        
+        #auth-button:active {
+            transform: scale(0.98);
+        }
+
+        /* MODE TOGGLE BUTTON STYLES (Outlined Color) */
+        #mode-toggle {
+            background: none;
+            border: 1px solid var(--text-color); 
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s, border-color 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1em; 
+        }
+
+        #mode-toggle:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+        
+        #mode-toggle:active {
+            transform: scale(0.98);
+        }
+
+        .material-icons-outlined {
+            font-size: 20px; 
+        }
+
+        /* 2. HOMEPAGE SECTION STYLES */
+
+        /* Hero Section */
+        #hero {
+            text-align: center;
+            padding: 120px 40px; /* Extra large padding for emphasis */
+            border-bottom: none; /* Keep the clean separation */
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left; /* Align text content to left */
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 50%;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 40%;
+            display: flex;
+            justify-content: flex-end; /* Align image to the right within its flex item */
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 550px; /* INCREASED height for large screens */
+        }
+
+        /* Hero Image Visibility Control (UPDATED LOGIC) */
+        /* Default (Light Mode): Show hero-light-img, Hide hero-dark-img */
+        #hero-light-img {
+            display: block;
+        }
+        #hero-dark-img {
+            display: none;
+        }
+
+        /* Dark Mode: Show hero-dark-img, Hide hero-light-img */
+        body.dark-mode #hero-light-img {
+            display: none;
+        }
+        body.dark-mode #hero-dark-img {
+            display: block;
+        }
+
+
+        #hero-cta {
+            margin-top: 30px;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        /* Grid Layout for Claims/Popular Sections */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-top: 40px;
+        }
+        
+        /* Claims Section Styles */
+        /* New Styles for the Claims content container (blended) */
+        .claim-content {
+            text-align: center; 
+            padding: 10px; /* Added minor padding for spacing */
+        }
+        
+        /* Styles for the Claims numbers */
+        .claim-number {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 3em; /* Make the number large */
+            font-weight: 700;
+            margin-bottom: 5px; /* Reduce space below number */
+            color: var(--text-color);
+            text-align: center; 
+            line-height: 1; /* Adjust line height for better spacing */
+        }
+        
+        /* Popular Section Styles (Wireframe Implementation) */
+        /* Adjust grid to fit 3 items nicely on large screens for Popular Section */
+        #popular .grid-container {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .popular-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px; 
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle grey shadow */
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .popular-item:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        body.dark-mode .popular-item:hover {
+             box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        .icon-wrapper {
+            /* Creates the subtle background rectangle for the icon */
+            width: 50px;
+            height: 50px;
+            min-width: 50px; /* Prevent shrinking */
+            min-height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Using subtle background and border to match wireframe style */
+            background-color: var(--subtle-bg-color); 
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .popular-icon {
+            font-size: 24px;
+        }
+
+        .popular-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 1.1em;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+
+        /* Demo Section Styles */
+        #demo-content {
+            border: none; /* Removing old border */
+            min-height: auto;
+            display: block;
+            margin-top: 40px;
+        }
+
+        .demo-container {
+            display: flex;
+            gap: 40px;
+            align-items: center; /* Center items vertically */
+        }
+        
+        .demo-video-wrapper {
+            flex: 1 1 550px;
+            max-width: 550px; 
+            aspect-ratio: 1 / 1; /* Maintain 1:1 ratio */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex; /* Centers the placeholder text */
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-placeholder {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2em;
+            color: var(--secondary-text-color);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .demo-features {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%; /* Ensure it takes available width when stacked */
+        }
+
+        .feature-card {
+            display: flex;
+            align-items: center; /* Vertically center icon and text block */
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            background-color: var(--subtle-bg-color);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            min-width: 28px; /* Ensure icon doesn't shrink */
+        }
+
+        .feature-text-content {
+            flex-grow: 1;
+        }
+
+        .feature-title {
+            font-family: 'Noto Sans', sans-serif; /* Use heading font */
+            font-weight: 600;
+            font-size: 1.1em; /* Small size, as requested */
+            color: var(--text-color);
+            margin: 0;
+        }
+        /* End Demo Section Styles */
+
+
+        /* Testimonials Section */
+        .testimonial-item {
+            text-align: center;
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-item .author {
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 0.9em;
+        }
+
+        /* Zero/Claims Section */
+        #zero {
+             text-align: center;
+        }
+
+        #zero h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        #zero p {
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            /* Adjustments for Demo Section on mid-sized screens */
+            .demo-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .demo-video-wrapper {
+                max-width: 100%; 
+                width: 100%;
+            }
+            .demo-features {
+                 max-width: 100%;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            h2 {
+                font-size: 1.75em;
+            }
+            .claim-number {
+                font-size: 2.5em;
+            }
+            section {
+                padding: 60px 20px;
+            }
+            #navbar {
+                padding: 10px 20px;
+            }
+            .nav-actions {
+                gap: 5px; 
+            }
+            #auth-button {
+                padding: 8px 10px;
+            }
+            #mode-text {
+                display: none;
+            }
+            #mode-toggle {
+                padding: 8px; 
+            }
+            .logo-img {
+                 height: 25px; 
+            }
+            /* Responsive Hero adjustments */
+            .hero-container {
+                flex-direction: column; /* Stack vertically on small screens */
+                text-align: center; /* Center content when stacked */
+            }
+            .hero-text {
+                min-width: 100%;
+                margin-bottom: 30px; /* Spacing between text and image */
+            }
+            .hero-image {
+                justify-content: center; /* Center image when stacked */
+                min-width: 100%;
+            }
+            /* Force Popular Grid to 2 columns on small screens */
+            #popular .grid-container {
+                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                 gap: 15px;
+            }
+            .popular-item {
+                padding: 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 1. NAVIGATION BAR -->
+    <header id="navbar">
+        <a href="#" class="logo">
+            <!-- Logo for Light Mode (shown by default) -->
+            <img id="logo-dark" src="https://kapilatgoogle.github.io/sahayak/assets/logo-dark.png" alt="SAHAYAK Logo Dark" class="logo-img">
+            <!-- Logo for Dark Mode (hidden by default) -->
+            <img id="logo-light" src="https://kapilatgoogle.github.io/sahayak/assets/logo-light.png" alt="SAHAYAK Logo Light" class="logo-img">
+            SAHAYAK
+        </a>
+        <div class="nav-actions">
+            <button id="auth-button">Login / Register</button>
+            <button id="mode-toggle" aria-label="Toggle dark mode">
+                <!-- Default icon is dark_mode (sun) for light mode -->
+                <span class="material-icons-outlined" id="mode-icon">dark_mode</span>
+                <span id="mode-text">Dark Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. MAIN CONTENT / HOMEPAGE -->
+    <main id="homepage">
+        
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="content-wrapper">
+                <div class="hero-container">
+                    <div class="hero-text">
+                        <h1>[Main Headline]</h1>
+                        <p>[Sub-headline / Value Proposition]</p>
+                        <button id="hero-cta" class="filled-button" style="
+                            background-color: var(--filled-button-bg); 
+                            color: var(--filled-button-text); 
+                            border: 1px solid var(--text-color); 
+                            padding: 15px 30px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            outline: none;
+                            transition: all 0.3s;
+                            font-family: 'Noto Sans', sans-serif;
+                            font-size: 1.1em;
+                            font-weight: 700;
+                        ">
+                            [Call to Action]
+                        </button>
+                    </div>
+                    <div class="hero-image">
+                        <!-- Image optimized for Light Mode -->
+                        <img id="hero-light-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-light.png" alt="Career Sahayak Dashboard Light Mode" >
+                        <!-- Image optimized for Dark Mode -->
+                        <img id="hero-dark-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-dark.png" alt="Career Sahayak Dashboard Dark Mode" >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Section (Showcasing popular tools/use cases) -->
+        <section id="popular">
+            <div class="content-wrapper">
+                <h2>Popular Job Simulations</h2>
+                <div class="grid-container">
+                    
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">account_balance_wallet</span>
+                        </div>
+                        <p class="popular-title">Accounting Executive</p>
+                    </div>
+
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">campaign</span>
+                        </div>
+                        <p class="popular-title">Marketing Manager</p>
+                    </div>
+
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">design_services</span>
+                        </div>
+                        <p class="popular-title">Graphic Designer</p>
+                    </div>
+
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">code</span>
+                        </div>
+                        <p class="popular-title">Frontend Developer</p>
+                    </div>
+
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">policy</span>
+                        </div>
+                        <p class="popular-title">Risk Analyst</p>
+                    </div>
+
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">rocket_launch</span>
+                        </div>
+                        <p class="popular-title">Data Scientist</p>
+                    </div>
+
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">trending_up</span>
+                        </div>
+                        <p class="popular-title">Sales Manager</p>
+                    </div>
+
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">medical_services</span>
+                        </div>
+                        <p class="popular-title">Safety Officer</p>
+                    </div>
+
+                    <div class="popular-item">
+                        <div class="icon-wrapper">
+                            <span class="material-icons-outlined popular-icon">school</span>
+                        </div>
+                        <p class="popular-title">Google Apprentice</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Demo Section -->
+        <section id="demo">
+            <div class="content-wrapper">
+                <!-- Removed the "See Sahayak in Action..." heading -->
+                <div id="demo-content">
+                    <div class="demo-container">
+                        
+                        <!-- Left Column: Video Placeholder -->
+                        <div class="demo-video-wrapper">
+                            <video controls width="100%" height="100%" poster="https://placehold.co/550x550/E0E0E0/333333?text=Video+Simulation+Demo">
+                                <!-- Placeholder source -->
+                                <source src="#" type="video/mp4">
+                                <div class="video-placeholder">
+                                    [ 550x550 Video Placeholder ]<br>
+                                    Your browser does not support the video tag.
+                                </div>
+                            </video>
+                        </div>
+
+                        <!-- Right Column: Vertical Feature Cards -->
+                        <div class="demo-features">
+                            
+                            <!-- Feature Card 1 -->
+                            <div class="feature-card">
+                                <span class="material-icons-outlined feature-icon">work_outline</span>
+                                <div class="feature-text-content">
+                                    <p class="feature-title">Diverse Job Roles</p>
+                                    <p class="description-text">Try on the hat of a Product Manager, Software Engineer, or UX Designer with our growing library of simulations.</p>
+                                </div>
+                            </div>
+
+                            <!-- Feature Card 2 -->
+                            <div class="feature-card">
+                                <span class="material-icons-outlined feature-icon">add_circle_outline</span>
+                                <div class="feature-text-content">
+                                    <p class="feature-title">Bring Your Own Job</p>
+                                    <p class="description-text">Paste any job description to generate a hyper-relevant simulation, tailored specifically to that role.</p>
+                                </div>
+                            </div>
+
+                            <!-- Feature Card 3 (Icon fixed from 'robot_2' to 'smart_toy') -->
+                            <div class="feature-card">
+                                <span class="material-icons-outlined feature-icon">smart_toy</span>
+                                <div class="feature-text-content">
+                                    <p class="feature-title">AI-Powered Scenarios</p>
+                                    <p class="description-text">Get realistic, on-the-fly tasks and challenges generated by Gemini, tailored to the job role selected.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials">
+            <div class="content-wrapper">
+                <h2>[Testimonials Section Title]</h2>
+                <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <!-- Placeholder Testimonial 1 -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Zero Section (Focus on a key benefit: Zero Friction) -->
+        <section id="zero">
+            <div class="content-wrapper">
+                <h2>[Zero Section Title]</h2>
+                <p>[Zero Section Subtext]</p>
+            </div>
+        </section>
+
+        <!-- Claims Section (Detailing Value Propositions) -->
+        <section id="claims">
+            <div class="content-wrapper">
+                <div class="grid-container">
+                    <div class="claim-content">
+                        <h3 class="claim-number">90%</h3>
+                        <p>Students lack clear, actionable career guidance.</p>
+                    </div>
+                    <div class="claim-content">
+                        <h3 class="claim-number">85%</h3>
+                        <p>Job seekers prefer AI-powered tools for interview prep.</p>
+                    </div>
+                    <div class="claim-content">
+                        <h3 class="claim-number">100%</h3>
+                        <p>Guidance is personalized and optimized just for you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 3. FOOTER -->
+    <footer id="footer" style="text-align: center; padding: 20px; border-top: 1px solid var(--border-color); color: var(--secondary-text-color); transition: border-color 0.3s, color 0.3s;">
+        <!-- Add copyright information, secondary links, or contact info here -->
+        <p style="margin: 0; font-size: 0.9em;">&copy; 2025 Career Sahayak Project Build for Apprentice Hacks 2025</p>
+        <p style="margin: 0; font-size: 0.9em;">By Bhagyashree Patil (bppatil), Kapil Pidhwani (hikapil), Yash Handuja (handuja), Sakshi Istwal (isakshiumesh) and Vaishnavi Shukla (vaishnavishukl)</p>
+    </footer>
+
+    <!-- Add your JavaScript here -->
+    <script>
+        const body = document.body;
+        const toggleButton = document.getElementById('mode-toggle');
+        const modeIcon = document.getElementById('mode-icon');
+        const modeText = document.getElementById('mode-text');
+
+        // Function to set the mode based on the value
+        function setMode(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                modeIcon.textContent = 'light_mode'; // Moon icon for light mode toggle
+                modeText.textContent = 'Light Mode';
+            } else {
+                body.classList.remove('dark-mode');
+                modeIcon.textContent = 'dark_mode'; // Sun icon for dark mode toggle
+                modeText.textContent = 'Dark Mode';
+            }
+            // Save the preference
+            localStorage.setItem('theme', theme);
+        }
+
+        // 1. Check for saved theme preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setMode(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // 2. Check system preference if no local preference exists
+            setMode('dark');
+        } else {
+            // 3. Default to light mode
+            setMode('light');
+        }
+
+        // Event listener for button click
+        toggleButton.addEventListener('click', () => {
+            const isDarkMode = body.classList.contains('dark-mode');
+            setMode(isDarkMode ? 'light' : 'dark');
+        });
+
+        console.log("Dark Mode Toggle initialized.");
+    </script>
+
+</body>
+</html>
 
