@@ -9,7 +9,7 @@
     <!-- Google Fonts: Outfit for content and Noto Sans for headings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- Google Material Icons for the mode toggle button and popular section icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -34,6 +34,9 @@
             min-height: 100vh;
             /* Smooth color transition when toggling modes */
             transition: background-color 0.3s, color 0.3s; 
+            
+            /* ADDED: Smooth scrolling for anchor links */
+            scroll-behavior: smooth; 
         }
         
         /* DARK MODE STYLES */
@@ -84,7 +87,6 @@
         /* General Section Styling */
         section {
             padding: 80px 40px;
-            border-bottom: 1px solid var(--border-color);
             transition: border-color 0.3s;
         }
 
@@ -125,15 +127,12 @@
         }
         
         /* Logo Visibility Control */
-        /* Default (Light Mode): Show logo-dark, Hide logo-light */
         #logo-light {
             display: none;
         }
         #logo-dark {
             display: block;
         }
-
-        /* Dark Mode: Show logo-light, Hide logo-dark */
         body.dark-mode #logo-light {
             display: block;
         }
@@ -141,12 +140,49 @@
             display: none;
         }
 
+        /* New Styles for Nav Links */
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            margin-right: 25px; 
+            margin-left: 20px; 
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: 'Noto Sans', sans-serif; 
+            font-weight: 500; 
+            font-size: 1em;
+            padding: 5px 0;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-text-color); 
+        }
+
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 10px; /* Space between the two buttons */
+            gap: 10px;
         }
         
+        /* Profile Photo Styles */
+        #profile-photo {
+            width: 35px;
+            height: 35px;
+            min-width: 35px; 
+            min-height: 35px;
+            border-radius: 50%;
+            background-color: var(--secondary-text-color); 
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            display: none;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
         /* AUTH BUTTON STYLES (Filled/Inverse Color) */
         #auth-button {
             background-color: var(--filled-button-bg); 
@@ -157,13 +193,13 @@
             cursor: pointer;
             outline: none;
             transition: all 0.2s, background-color 0.3s, color 0.3s;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Noto Sans', sans-serif; 
             font-size: 1em;
             font-weight: 500;
         }
 
         #auth-button:hover {
-            opacity: 0.85; /* Slight opacity change on hover */
+            opacity: 0.85;
         }
         
         #auth-button:active {
@@ -184,6 +220,8 @@
             align-items: center;
             gap: 5px;
             font-size: 1em; 
+            font-family: 'Noto Sans', sans-serif; 
+            font-weight: 500; 
         }
 
         #mode-toggle:hover {
@@ -204,15 +242,15 @@
         /* Hero Section */
         #hero {
             text-align: center;
-            padding: 120px 40px; /* Extra large padding for emphasis */
-            border-bottom: none; /* Keep the clean separation */
+            padding: 120px 40px; 
+            border-bottom: none; 
         }
 
         .hero-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            text-align: left; /* Align text content to left */
+            text-align: left;
             gap: 40px;
         }
 
@@ -220,30 +258,49 @@
             flex: 1;
             min-width: 50%;
         }
+        
+        /* New Gemini Badge Style */
+        .gemini-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-bottom: 10px;
+            padding: 5px 12px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-text-color);
+        }
+        
+        .gemini-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--secondary-text-color); 
+        }
 
         .hero-image {
             flex: 1;
             min-width: 40%;
             display: flex;
-            justify-content: flex-end; /* Align image to the right within its flex item */
+            justify-content: flex-end;
         }
         
         .hero-image img {
             max-width: 100%;
             height: auto;
-            max-height: 550px; /* INCREASED height for large screens */
+            max-height: 550px; 
         }
 
         /* Hero Image Visibility Control (UPDATED LOGIC) */
-        /* Default (Light Mode): Show hero-light-img, Hide hero-dark-img */
         #hero-light-img {
             display: block;
         }
         #hero-dark-img {
             display: none;
         }
-
-        /* Dark Mode: Show hero-dark-img, Hide hero-light-img */
         body.dark-mode #hero-light-img {
             display: none;
         }
@@ -251,12 +308,11 @@
             display: block;
         }
 
-
         #hero-cta {
             margin-top: 30px;
-            padding: 12px 24px;
+            padding: 15px 30px; 
             font-size: 1.1em;
-            font-weight: 500;
+            font-weight: 700; 
         }
 
         /* Grid Layout for Claims/Popular Sections */
@@ -269,25 +325,27 @@
         }
         
         /* Claims Section Styles */
-        /* New Styles for the Claims content container (blended) */
+        #claims {
+            padding: 40px 40px; 
+        }
+        
         .claim-content {
             text-align: center; 
-            padding: 10px; /* Added minor padding for spacing */
+            padding: 10px;
         }
         
         /* Styles for the Claims numbers */
         .claim-number {
             font-family: 'Noto Sans', sans-serif;
-            font-size: 3em; /* Make the number large */
+            font-size: 3em; 
             font-weight: 700;
-            margin-bottom: 5px; /* Reduce space below number */
+            margin-bottom: 5px; 
             color: var(--text-color);
             text-align: center; 
-            line-height: 1; /* Adjust line height for better spacing */
+            line-height: 1;
         }
         
         /* Popular Section Styles (Wireframe Implementation) */
-        /* Adjust grid to fit 3 items nicely on large screens for Popular Section */
         #popular .grid-container {
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
@@ -301,7 +359,7 @@
             padding: 25px; 
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle grey shadow */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
             cursor: pointer;
         }
@@ -316,16 +374,14 @@
         }
 
         .icon-wrapper {
-            /* Creates the subtle background rectangle for the icon */
             width: 50px;
             height: 50px;
-            min-width: 50px; /* Prevent shrinking */
+            min-width: 50px; 
             min-height: 50px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Using subtle background and border to match wireframe style */
             background-color: var(--subtle-bg-color); 
             border: 1px solid var(--border-color);
             transition: all 0.3s;
@@ -347,7 +403,7 @@
 
         /* Demo Section Styles */
         #demo-content {
-            border: none; /* Removing old border */
+            border: none;
             min-height: auto;
             display: block;
             margin-top: 40px;
@@ -356,17 +412,17 @@
         .demo-container {
             display: flex;
             gap: 40px;
-            align-items: center; /* Center items vertically */
+            align-items: center;
         }
         
         .demo-video-wrapper {
             flex: 1 1 550px;
             max-width: 550px; 
-            aspect-ratio: 1 / 1; /* Maintain 1:1 ratio */
+            aspect-ratio: 1 / 1;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
-            display: flex; /* Centers the placeholder text */
+            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -384,12 +440,12 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            width: 100%; /* Ensure it takes available width when stacked */
+            width: 100%;
         }
 
         .feature-card {
             display: flex;
-            align-items: center; /* Vertically center icon and text block */
+            align-items: center;
             gap: 20px;
             padding: 20px;
             border: 1px solid var(--border-color);
@@ -404,7 +460,7 @@
 
         .feature-icon {
             font-size: 28px;
-            min-width: 28px; /* Ensure icon doesn't shrink */
+            min-width: 28px; 
         }
 
         .feature-text-content {
@@ -412,45 +468,208 @@
         }
 
         .feature-title {
-            font-family: 'Noto Sans', sans-serif; /* Use heading font */
+            font-family: 'Noto Sans', sans-serif;
             font-weight: 600;
-            font-size: 1.1em; /* Small size, as requested */
+            font-size: 1.1em;
             color: var(--text-color);
             margin: 0;
         }
         /* End Demo Section Styles */
 
 
-        /* Testimonials Section */
-        .testimonial-item {
+        /* Testimonials Section Styles */
+        #testimonials h2 {
+            margin-bottom: 5px;
+        }
+        
+        #testimonials .sub-header {
             text-align: center;
+            color: var(--secondary-text-color);
+            margin-bottom: 40px;
         }
 
-        .testimonial-item p {
-            font-style: italic;
-            font-size: 1.1em;
+        /* NEW SLIDESHOW STYLES */
+        .slideshow-wrapper {
+            /* Create a viewport for the cards */
+            overflow: hidden; 
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slideshow-container {
+            /* Flex layout for horizontal arrangement */
+            display: flex;
+            gap: 30px;
+            /* Padding is added via JS to center first/last card */
+            padding: 10px 0; 
+            /* Smooth transformation */
+            transition: transform 0.5s ease-in-out; 
+            /* Set to scroll to hide the scrollbar */
+            overflow-x: scroll;
+            
+            /* HIDE SCROLLBAR */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            
+            /* ADDED SCROLL PADDING for centering the first and last card */
+            scroll-padding-left: 0;
+            scroll-padding-right: 0;
+            scroll-snap-type: x mandatory; 
+        }
+        
+        /* HIDE SCROLLBAR FOR WEBKIT BROWSERS (Chrome, Safari) */
+        .slideshow-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .testimonial-card {
+            /* Fixed width for each card in the slideshow */
+            min-width: 350px;
+            max-width: 350px; 
+            height: auto;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--bg-color);
+            position: relative;
+            
+            /* Enable snapping to the card's center position */
+            scroll-snap-align: center; 
+            
+            /* Apply initial non-active state */
+            opacity: 0.4;
+            transform: scale(0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s ease-in-out; /* Smooth transition for scale/opacity */
+        }
+        
+        /* ACTIVE CARD STYLES (Center Card) */
+        .testimonial-card.active {
+            opacity: 1; 
+            transform: scale(1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Dark mode active shadow adjustment */
+        body.dark-mode .testimonial-card.active {
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Quote icon styling using pseudo-elements */
+        .testimonial-card::before,
+        .testimonial-card::after {
+            content: "\201C";
+            font-size: 5em;
+            font-family: 'Noto Sans', sans-serif;
+            position: absolute;
+            color: var(--border-color);
+            transition: color 0.3s;
+            line-height: 1;
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .testimonial-card::before {
+            top: -15px;
+            left: 10px;
+            transform: scaleX(-1);
+        }
+        
+        .testimonial-card::after {
+            content: "\201D";
+            bottom: -15px;
+            right: 10px;
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 5;
+        }
+
+        .testimonial-content h3 {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-top: 0;
             margin-bottom: 10px;
-        }
-
-        .testimonial-item .author {
-            font-weight: 500;
             color: var(--text-color);
-            font-size: 0.9em;
+        }
+        
+        .testimonial-content p {
+            font-style: italic;
+            font-size: 0.95em;
+            color: var(--secondary-text-color);
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .author-photo-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            min-width: 50px;
+            min-height: 50px;
+        }
+        
+        .author-details p {
+            margin: 0;
+            line-height: 1.2;
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .author-details small {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85em;
+            color: var(--secondary-text-color);
         }
 
         /* Zero/Claims Section */
         #zero {
-             text-align: center;
+            text-align: center;
         }
 
+        #zero .zero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left; 
+            gap: 40px;
+        }
+        
+        #zero .zero-text {
+            flex: 1;
+            min-width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
         #zero h2 {
-            font-size: 3em;
+            text-align: left;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
+        
         #zero p {
-            font-size: 1.2em;
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 1.1em;
+            max-width: 100%;
+            margin: 0 0 30px 0;
+            text-align: left;
+        }
+        
+        #zero .zero-image {
+            flex: 1;
+            min-width: 40%;
+            display: flex;
+            justify-content: flex-end;
         }
 
 
@@ -468,6 +687,24 @@
             .demo-features {
                  max-width: 100%;
             }
+
+            /* Responsive Nav Links */
+            .nav-actions {
+                 gap: 15px;
+            }
+            
+            /* Zero Section adjustments */
+            #zero .zero-container {
+                 flex-direction: column-reverse;
+                 text-align: center;
+            }
+            #zero .zero-text, #zero h2, #zero p {
+                text-align: center;
+                align-items: center;
+            }
+            #zero .zero-text {
+                 margin-top: 30px;
+            }
         }
         @media (max-width: 768px) {
             h1 {
@@ -481,6 +718,9 @@
             }
             section {
                 padding: 60px 20px;
+            }
+            #claims {
+                padding: 30px 20px;
             }
             #navbar {
                 padding: 10px 20px;
@@ -500,17 +740,20 @@
             .logo-img {
                  height: 25px; 
             }
+            .nav-links {
+                display: none; 
+            }
             /* Responsive Hero adjustments */
             .hero-container {
-                flex-direction: column; /* Stack vertically on small screens */
-                text-align: center; /* Center content when stacked */
+                flex-direction: column;
+                text-align: center;
             }
             .hero-text {
                 min-width: 100%;
-                margin-bottom: 30px; /* Spacing between text and image */
+                margin-bottom: 30px;
             }
             .hero-image {
-                justify-content: center; /* Center image when stacked */
+                justify-content: center;
                 min-width: 100%;
             }
             /* Force Popular Grid to 2 columns on small screens */
@@ -520,6 +763,19 @@
             }
             .popular-item {
                 padding: 15px;
+            }
+            /* Testimonial card is now full width on mobile */
+            .testimonial-card {
+                min-width: 100vw;
+                max-width: 100vw;
+                box-sizing: border-box;
+                padding: 30px 20px; 
+            }
+            /* Compensate for section padding when aligning center card */
+            .slideshow-wrapper {
+                 /* The magic number 20px is the horizontal section padding */
+                 margin-left: -20px; 
+                 width: calc(100% + 40px);
             }
         }
 
@@ -536,13 +792,27 @@
             <img id="logo-light" src="https://kapilatgoogle.github.io/sahayak/assets/logo-light.png" alt="SAHAYAK Logo Light" class="logo-img">
             SAHAYAK
         </a>
+        
         <div class="nav-actions">
-            <button id="auth-button">Login / Register</button>
+            <!-- NAV LINKS -->
+            <nav class="nav-links">
+                <a href="#hero" class="nav-link">Dashboard</a>
+                <a href="#popular" class="nav-link">Simulations</a>
+                <a href="#footer" class="nav-link">About</a>
+            </nav>
+            
+            <!-- Dark Mode Toggle -->
             <button id="mode-toggle" aria-label="Toggle dark mode">
                 <!-- Default icon is dark_mode (sun) for light mode -->
                 <span class="material-icons-outlined" id="mode-icon">dark_mode</span>
                 <span id="mode-text">Dark Mode</span>
             </button>
+            
+            <!-- Login / Register / Logout button (Moved to the left of the profile photo) -->
+            <button id="auth-button">Login / Register</button>
+            
+            <!-- Circular Profile Photo Placeholder (Now on the right of the auth button) -->
+            <div id="profile-photo" title="User Profile"></div>
         </div>
     </header>
 
@@ -554,8 +824,21 @@
             <div class="content-wrapper">
                 <div class="hero-container">
                     <div class="hero-text">
-                        <h1>[Main Headline]</h1>
-                        <p>[Sub-headline / Value Proposition]</p>
+                        <!-- Gemini Badge -->
+                        <div class="gemini-badge">
+                            <div class="gemini-icon"></div>
+                            Powered by Gemini AI
+                        </div>
+                        
+                        <!-- Main Headline -->
+                        <h1>Experience the Job. Before You Apply.</h1>
+                        
+                        <!-- Sub-headline -->
+                        <p style="font-size: 1.2em; max-width: 90%; margin-bottom: 30px;">
+                            Career Sahayak provides realistic, AI-driven job simulations that give you a hands-on feel for the role, removing guesswork from your next career move.
+                        </p>
+                        
+                        <!-- Call to Action (UPDATED TEXT) -->
                         <button id="hero-cta" class="filled-button" style="
                             background-color: var(--filled-button-bg); 
                             color: var(--filled-button-text); 
@@ -569,7 +852,7 @@
                             font-size: 1.1em;
                             font-weight: 700;
                         ">
-                            [Call to Action]
+                            Go to Simulations →
                         </button>
                     </div>
                     <div class="hero-image">
@@ -577,6 +860,26 @@
                         <img id="hero-light-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-light.png" alt="Career Sahayak Dashboard Light Mode" >
                         <!-- Image optimized for Dark Mode -->
                         <img id="hero-dark-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-dark.png" alt="Career Sahayak Dashboard Dark Mode" >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Claims Section (Detailing Value Propositions) - MOVED HERE -->
+        <section id="claims">
+            <div class="content-wrapper">
+                <div class="grid-container">
+                    <div class="claim-content">
+                        <h3 class="claim-number">90%</h3>
+                        <p>Students lack clear, actionable career guidance.</p>
+                    </div>
+                    <div class="claim-content">
+                        <h3 class="claim-number">85%</h3>
+                        <p>Job seekers prefer AI-powered tools for interview prep.</p>
+                    </div>
+                    <div class="claim-content">
+                        <h3 class="claim-number">100%</h3 >
+                        <p>Guidance is personalized and optimized just for you.</p>
                     </div>
                 </div>
             </div>
@@ -657,7 +960,6 @@
         <!-- Demo Section -->
         <section id="demo">
             <div class="content-wrapper">
-                <!-- Removed the "See Sahayak in Action..." heading -->
                 <div id="demo-content">
                     <div class="demo-container">
                         
@@ -711,9 +1013,82 @@
         <!-- Testimonials Section -->
         <section id="testimonials">
             <div class="content-wrapper">
-                <h2>[Testimonials Section Title]</h2>
-                <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-                    <!-- Placeholder Testimonial 1 -->
+                <h2>Testimonials From Our Customers</h2>
+                <p class="sub-header">See what people are saying about their Career Sahayak experience.</p>
+                
+                <!-- NEW SLIDESHOW WRAPPER -->
+                <div class="slideshow-wrapper">
+                    <div class="slideshow-container">
+                        
+                        <!-- Testimonial Card 1 -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <h3>A Game Changer for Career Planning</h3>
+                                <p>
+                                    "Before Sahayak, I was overwhelmed by job titles. Now, after running a simulation, I know exactly what a Data Scientist day looks like. It gave me the confidence to apply."
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="author-photo-placeholder"></div>
+                                    <div class="author-details">
+                                        <p>Gabriel Nolan</p>
+                                        <small>Consultant</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial Card 2 -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <h3>Realistic and Highly Relevant</h3>
+                                <p>
+                                    "I used the 'Bring Your Own Job' feature for a specific Marketing Manager role. The scenarios Gemini generated were spot-on and perfectly aligned with the job description. Unbelievably helpful!"
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="author-photo-placeholder"></div>
+                                    <div class="author-details">
+                                        <p>Ashley Jenkins</p>
+                                        <small>Designer</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial Card 3 -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <h3>Zero Friction, All Value</h3>
+                                <p>
+                                    "The fact that this tool is free and requires no long sign-ups is amazing. I got straight into the simulation and learned more in 30 minutes than weeks of reading job boards."
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="author-photo-placeholder"></div>
+                                    <div class="author-details">
+                                        <p>Nicole Wells</p>
+                                        <small>Web Developer</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial Card 4 (Bonus/Placeholder) -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <h3>Confidence Booster</h3>
+                                <p>
+                                    "The simulation feedback gave me clear, actionable steps on where I need to improve my skills before my next interview. I feel 100% more prepared now."
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="author-photo-placeholder"></div>
+                                    <div class="author-details">
+                                        <p>Samir Khan</p>
+                                        <small>Recent Graduate</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </section>
@@ -721,26 +1096,39 @@
         <!-- Zero Section (Focus on a key benefit: Zero Friction) -->
         <section id="zero">
             <div class="content-wrapper">
-                <h2>[Zero Section Title]</h2>
-                <p>[Zero Section Subtext]</p>
-            </div>
-        </section>
-
-        <!-- Claims Section (Detailing Value Propositions) -->
-        <section id="claims">
-            <div class="content-wrapper">
-                <div class="grid-container">
-                    <div class="claim-content">
-                        <h3 class="claim-number">90%</h3>
-                        <p>Students lack clear, actionable career guidance.</p>
+                <div class="zero-container">
+                    
+                    <!-- Left Column: Text and CTA (Zero-text) -->
+                    <div class="zero-text">
+                        <h2>Zero Barriers. Zero Cost. All Impact.</h2>
+                        <p>
+                            We believe that career clarity shouldn't come with a price tag. Access our full suite of AI-driven job simulations completely free, with no sign-up required. Start exploring your future career path instantly.
+                        </p>
+                        
+                        <!-- CTA Button -->
+                        <button id="zero-cta" class="filled-button" style="
+                            background-color: var(--filled-button-bg); 
+                            color: var(--filled-button-text); 
+                            border: 1px solid var(--text-color); 
+                            padding: 15px 30px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            outline: none;
+                            transition: all 0.3s;
+                            font-family: 'Noto Sans', sans-serif;
+                            font-size: 1.1em;
+                            font-weight: 700;
+                            margin-top: 10px;
+                        " onclick="window.location.href='#popular'">
+                            Go to Simulations →
+                        </button>
                     </div>
-                    <div class="claim-content">
-                        <h3 class="claim-number">85%</h3>
-                        <p>Job seekers prefer AI-powered tools for interview prep.</p>
-                    </div>
-                    <div class="claim-content">
-                        <h3 class="claim-number">100%</h3>
-                        <p>Guidance is personalized and optimized just for you.</p>
+                    
+                    <!-- Right Column: Image -->
+                    <div class="zero-image">
+                        <!-- Reusing theme-aware hero images -->
+                        <img id="zero-light-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-light.png" alt="Career Sahayak Dashboard Light Mode" style="max-width: 100%; height: auto; max-height: 550px;">
+                        <img id="zero-dark-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-dark.png" alt="Career Sahayak Dashboard Dark Mode" style="max-width: 100%; height: auto; max-height: 550px; display: none;">
                     </div>
                 </div>
             </div>
@@ -749,7 +1137,7 @@
     </main>
 
     <!-- 3. FOOTER -->
-    <footer id="footer" style="text-align: center; padding: 20px; border-top: 1px solid var(--border-color); color: var(--secondary-text-color); transition: border-color 0.3s, color 0.3s;">
+    <footer id="footer" style="text-align: center; padding: 20px; color: var(--secondary-text-color); transition: border-color 0.3s, color 0.3s;">
         <!-- Add copyright information, secondary links, or contact info here -->
         <p style="margin: 0; font-size: 0.9em;">&copy; 2025 Career Sahayak Project Build for Apprentice Hacks 2025</p>
         <p style="margin: 0; font-size: 0.9em;">By Bhagyashree Patil (bppatil), Kapil Pidhwani (hikapil), Yash Handuja (handuja), Sakshi Istwal (isakshiumesh) and Vaishnavi Shukla (vaishnavishukl)</p>
@@ -761,43 +1149,190 @@
         const toggleButton = document.getElementById('mode-toggle');
         const modeIcon = document.getElementById('mode-icon');
         const modeText = document.getElementById('mode-text');
+        
+        const authButton = document.getElementById('auth-button');
+        const profilePhoto = document.getElementById('profile-photo');
+        
+        // --- Zero Section Image Elements ---
+        const zeroLightImg = document.getElementById('zero-light-img');
+        const zeroDarkImg = document.getElementById('zero-dark-img');
+        
+        // --- Slideshow Elements ---
+        const slideshowWrapper = document.querySelector('.slideshow-wrapper');
+        const slideshowContainer = document.querySelector('.slideshow-container');
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        let currentSlide = 0;
+        const slideInterval = 5000; // 5 seconds
+        let slideshowTimer;
 
-        // Function to set the mode based on the value
+        // --- Dark/Light Mode Logic ---
+        
         function setMode(theme) {
             if (theme === 'dark') {
                 body.classList.add('dark-mode');
-                modeIcon.textContent = 'light_mode'; // Moon icon for light mode toggle
+                modeIcon.textContent = 'light_mode'; 
                 modeText.textContent = 'Light Mode';
+                
+                // Hide light images, show dark images
+                if (zeroLightImg && zeroDarkImg) {
+                    zeroLightImg.style.display = 'none';
+                    zeroDarkImg.style.display = 'block';
+                }
+
             } else {
                 body.classList.remove('dark-mode');
-                modeIcon.textContent = 'dark_mode'; // Sun icon for dark mode toggle
+                modeIcon.textContent = 'dark_mode';
                 modeText.textContent = 'Dark Mode';
+                
+                // Show light images, hide dark images
+                if (zeroLightImg && zeroDarkImg) {
+                    zeroLightImg.style.display = 'block';
+                    zeroDarkImg.style.display = 'none';
+                }
             }
-            // Save the preference
             localStorage.setItem('theme', theme);
         }
 
-        // 1. Check for saved theme preference on load
+        // --- Authentication/Login/Logout Logic ---
+
+        function updateAuthUI(isLoggedIn) {
+            if (isLoggedIn) {
+                authButton.textContent = 'Logout';
+                // Button appearance for logged-in state (outlined)
+                authButton.style.border = '1px solid var(--border-color)'; 
+                authButton.style.backgroundColor = 'transparent';
+                authButton.style.color = 'var(--text-color)';
+                profilePhoto.style.display = 'block';
+            } else {
+                authButton.textContent = 'Login / Register';
+                // Button appearance for logged-out state (filled)
+                authButton.style.border = '1px solid var(--text-color)'; 
+                authButton.style.backgroundColor = 'var(--filled-button-bg)';
+                authButton.style.color = 'var(--filled-button-text)';
+                profilePhoto.style.display = 'none';
+            }
+            localStorage.setItem('isLoggedIn', isLoggedIn ? 'true' : 'false');
+        }
+
+        // Event listener for Auth button click
+        authButton.addEventListener('click', () => {
+            const isLoggedIn = authButton.textContent === 'Logout';
+            updateAuthUI(!isLoggedIn);
+        });
+        
+        // --- Slideshow Logic ---
+        
+        function updateSlideshow() {
+            if (!slideshowContainer || testimonialCards.length === 0) return;
+            
+            // Get the slide index that needs to be centered
+            const slideIndexToCenter = currentSlide % testimonialCards.length;
+            
+            const wrapperWidth = slideshowWrapper.offsetWidth;
+            const cardWidth = testimonialCards[0].offsetWidth;
+            const gap = 30; // Defined in CSS for .slideshow-container
+
+            // Calculate the total scroll offset to move the target card into the center.
+            // Scroll Position = (Target Card Index * (Card Width + Gap)) - (Space on Left to Center Card)
+            const cardPosition = slideIndexToCenter * (cardWidth + gap);
+            const spaceToCenter = (wrapperWidth / 2) - (cardWidth / 2);
+            const scrollToX = cardPosition - spaceToCenter;
+
+            // 1. Perform the smooth scroll
+            slideshowContainer.scroll({
+                left: scrollToX,
+                behavior: 'smooth'
+            });
+
+            // 2. Update the 'active' class for focused styling
+            testimonialCards.forEach((card, index) => {
+                card.classList.remove('active');
+                if (index === slideIndexToCenter) {
+                    card.classList.add('active');
+                }
+            });
+
+            // 3. Advance to the next slide (for the next iteration)
+            currentSlide++;
+            
+            // 4. Reset counter to 0 if it goes past the total number of cards for proper modulo arithmetic on the next loop.
+            if (currentSlide >= testimonialCards.length) {
+                currentSlide = 0;
+            }
+        }
+
+        function startSlideshow() {
+            // Set initial slide state and position immediately
+            currentSlide = 0;
+            updateSlideshow(); // Center and spotlight the first card (index 0)
+            
+            // Start the interval timer for continuous sliding (will advance to index 1 after 5s)
+            slideshowTimer = setInterval(updateSlideshow, slideInterval);
+        }
+        
+        function initTestimonialSlideshow() {
+            if (slideshowContainer && testimonialCards.length > 0) {
+                 // Calculate and set initial scroll padding to center the first and last card
+                 const cardWidth = testimonialCards[0].offsetWidth;
+                 const wrapperWidth = slideshowWrapper.offsetWidth;
+                 
+                 // Required padding to center the card on the left side
+                 const paddingValue = (wrapperWidth / 2) - (cardWidth / 2);
+
+                 // Apply calculated padding
+                 slideshowContainer.style.scrollPaddingLeft = `${paddingValue}px`;
+                 slideshowContainer.style.scrollPaddingRight = `${paddingValue}px`;
+
+                 // Start slideshow if there is more than one card
+                 if (testimonialCards.length > 1) {
+                    // Stop any existing timer before starting
+                    if(slideshowTimer) clearInterval(slideshowTimer);
+                    startSlideshow();
+                 } else {
+                    testimonialCards[0].classList.add('active');
+                 }
+            }
+        }
+
+
+        // --- Initialization on Load ---
+
+        // 1. Initialize Dark/Light Mode
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             setMode(savedTheme);
         } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            // 2. Check system preference if no local preference exists
             setMode('dark');
         } else {
-            // 3. Default to light mode
             setMode('light');
         }
 
-        // Event listener for button click
+        // 2. Initialize Auth State
+        const savedLoginState = localStorage.getItem('isLoggedIn') === 'true';
+        updateAuthUI(savedLoginState);
+
+        // 3. Initialize Slideshow
+        // Use a window.onload listener to ensure all card dimensions are calculated correctly
+        window.onload = function() {
+            initTestimonialSlideshow();
+        };
+
+        // Event listener for mode toggle button click
         toggleButton.addEventListener('click', () => {
             const isDarkMode = body.classList.contains('dark-mode');
             setMode(isDarkMode ? 'light' : 'dark');
         });
+        
+        // Re-initialize slideshow on resize to fix padding and centering issues
+        window.addEventListener('resize', () => {
+            // Clear existing timer and re-initialize
+            clearInterval(slideshowTimer);
+            // Wait for a moment for resize calculation to stabilize
+            setTimeout(initTestimonialSlideshow, 100); 
+        });
 
-        console.log("Dark Mode Toggle initialized.");
+
     </script>
 
 </body>
 </html>
-
