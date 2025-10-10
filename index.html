@@ -11,16 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Google Material Icons for the mode toggle button and popular section icons -->
+    <!-- Google Material Icons for the popular section icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
     <!-- Pure CSS Styles -->
     <style>
         body {
-            /* Use CSS variables for easy mode switching */
+            /* Hardcoded Light Mode Colors */
             --bg-color: #FFFFFF;
             --text-color: #000000;
-            --secondary-text-color: #333333; /* Darker grey for body text contrast in Light Mode */
+            --secondary-text-color: #333333; /* Darker grey for body text contrast */
             --border-color: #E0E0E0; /* Light grey border */
             --subtle-bg-color: #F8F8F8; /* Very light grey for card backgrounds */
             --filled-button-bg: var(--text-color);
@@ -32,22 +32,11 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
-            /* Smooth color transition when toggling modes */
-            transition: background-color 0.3s, color 0.3s; 
             
-            /* ADDED: Smooth scrolling for anchor links */
+            /* Smooth scrolling for anchor links */
             scroll-behavior: smooth; 
         }
         
-        /* DARK MODE STYLES */
-        body.dark-mode {
-            --bg-color: #000000;
-            --text-color: #FFFFFF;
-            --secondary-text-color: #AAAAAA; /* Light grey for body text contrast in Dark Mode */
-            --border-color: #333333; /* Dark grey border */
-            --subtle-bg-color: #111111; /* Very dark grey for card backgrounds */
-        }
-
         h1 {
             /* Use Noto Sans for headings */
             font-family: 'Noto Sans', sans-serif;
@@ -55,7 +44,6 @@
             font-size: 3em; /* Larger for hero */
             margin-bottom: 20px;
             font-weight: 700;
-            transition: color 0.3s;
         }
 
         h2 {
@@ -72,7 +60,6 @@
             font-size: 1em;
             color: var(--secondary-text-color);
             line-height: 1.6;
-            transition: color 0.3s;
         }
         
         /* Small descriptive text in Outfit font */
@@ -87,7 +74,6 @@
         /* General Section Styling */
         section {
             padding: 80px 40px;
-            transition: border-color 0.3s;
         }
 
         .content-wrapper {
@@ -103,7 +89,6 @@
             justify-content: space-between;
             align-items: center;
             background-color: var(--bg-color);
-            transition: background-color 0.3s, border-color 0.3s;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -115,30 +100,19 @@
             font-size: 1.5em;
             color: var(--text-color);
             text-decoration: none;
-            transition: color 0.3s;
-            display: flex; /* Allows inline alignment of logo image and text */
+            display: flex; 
             align-items: center;
-            gap: 10px; /* Spacing between the logo image and text */
+            gap: 10px; 
         }
 
         .logo-img {
-            height: 30px; /* Adjusted height for better vertical alignment in the nav bar */
+            height: 30px; 
             width: auto;
         }
         
-        /* Logo Visibility Control */
-        #logo-light {
-            display: none;
-        }
-        #logo-dark {
-            display: block;
-        }
-        body.dark-mode #logo-light {
-            display: block;
-        }
-        body.dark-mode #logo-dark {
-            display: none;
-        }
+        /* Only dark logo is used now */
+        #logo-light { display: none; }
+        #logo-dark { display: block; }
 
         /* New Styles for Nav Links */
         .nav-links {
@@ -155,7 +129,6 @@
             font-weight: 500; 
             font-size: 1em;
             padding: 5px 0;
-            transition: color 0.3s;
             position: relative;
         }
 
@@ -166,6 +139,7 @@
         .nav-actions {
             display: flex;
             align-items: center;
+            /* Removed gap since mode toggle is gone, just need gap for auth button and profile photo */
             gap: 10px;
         }
         
@@ -180,10 +154,9 @@
             border: 1px solid var(--border-color);
             cursor: pointer;
             display: none;
-            transition: background-color 0.3s, border-color 0.3s;
         }
 
-        /* AUTH BUTTON STYLES (Filled/Inverse Color) */
+        /* AUTH BUTTON STYLES (Always Filled/Inverse Color in Light Mode) */
         #auth-button {
             background-color: var(--filled-button-bg); 
             color: var(--filled-button-text); 
@@ -192,7 +165,7 @@
             border-radius: 6px;
             cursor: pointer;
             outline: none;
-            transition: all 0.2s, background-color 0.3s, color 0.3s;
+            transition: all 0.2s;
             font-family: 'Noto Sans', sans-serif; 
             font-size: 1em;
             font-weight: 500;
@@ -206,36 +179,43 @@
             transform: scale(0.98);
         }
 
-        /* MODE TOGGLE BUTTON STYLES (Outlined Color) */
-        #mode-toggle {
-            background: none;
-            border: 1px solid var(--text-color); 
-            color: var(--text-color);
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            outline: none;
-            transition: all 0.2s, border-color 0.3s, color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 1em; 
-            font-family: 'Noto Sans', sans-serif; 
-            font-weight: 500; 
-        }
-
-        #mode-toggle:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-        }
-        
-        #mode-toggle:active {
-            transform: scale(0.98);
-        }
+        /* Removed #mode-toggle styles */
 
         .material-icons-outlined {
             font-size: 20px; 
         }
+        
+        /* NEW: Back to Top Button Styles */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--text-color); /* Black background */
+            color: var(--bg-color); /* White icon */
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0; /* Hidden by default */
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 900; /* Below nav bar */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #back-to-top .material-icons-outlined {
+            font-size: 28px;
+        }
+
 
         /* 2. HOMEPAGE SECTION STYLES */
 
@@ -274,12 +254,13 @@
             color: var(--secondary-text-color);
         }
         
-        .gemini-icon {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--secondary-text-color); 
+        /* New Gemini Icon Image Style */
+        .gemini-badge img {
+            height: 14px;
+            vertical-align: middle;
         }
+        
+        /* Removed old .gemini-icon placeholder style */
 
         .hero-image {
             flex: 1;
@@ -294,19 +275,9 @@
             max-height: 550px; 
         }
 
-        /* Hero Image Visibility Control (UPDATED LOGIC) */
-        #hero-light-img {
-            display: block;
-        }
-        #hero-dark-img {
-            display: none;
-        }
-        body.dark-mode #hero-light-img {
-            display: none;
-        }
-        body.dark-mode #hero-dark-img {
-            display: block;
-        }
+        /* Hero Image Visibility Control (Simplified to use only light image) */
+        #hero-light-img { display: block; }
+        #hero-dark-img { display: none; }
 
         #hero-cta {
             margin-top: 30px;
@@ -369,9 +340,8 @@
             transform: translateY(-2px);
         }
         
-        body.dark-mode .popular-item:hover {
-             box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
-        }
+        /* Simplified hover state for permanent light mode */
+        /* removed body.dark-mode hover styles */
 
         .icon-wrapper {
             width: 50px;
@@ -550,11 +520,6 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
-        /* Dark mode active shadow adjustment */
-        body.dark-mode .testimonial-card.active {
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
-        }
-        
         /* Quote icon styling using pseudo-elements */
         .testimonial-card::before,
         .testimonial-card::after {
@@ -563,7 +528,6 @@
             font-family: 'Noto Sans', sans-serif;
             position: absolute;
             color: var(--border-color);
-            transition: color 0.3s;
             line-height: 1;
             z-index: 1;
             opacity: 0.5;
@@ -731,12 +695,9 @@
             #auth-button {
                 padding: 8px 10px;
             }
-            #mode-text {
-                display: none;
-            }
-            #mode-toggle {
-                padding: 8px; 
-            }
+            /* .nav-actions no longer needs to deal with mode-toggle on mobile */
+            /* Removed mobile style for #mode-text and #mode-toggle padding */
+            
             .logo-img {
                  height: 25px; 
             }
@@ -796,17 +757,13 @@
         <div class="nav-actions">
             <!-- NAV LINKS -->
             <nav class="nav-links">
-                <a href="#hero" class="nav-link">Dashboard</a>
+                <a href="#" class="nav-link">Home</a>
                 <a href="#popular" class="nav-link">Simulations</a>
+                <a href="#hero" class="nav-link">Dashboard</a>
                 <a href="#footer" class="nav-link">About</a>
             </nav>
             
-            <!-- Dark Mode Toggle -->
-            <button id="mode-toggle" aria-label="Toggle dark mode">
-                <!-- Default icon is dark_mode (sun) for light mode -->
-                <span class="material-icons-outlined" id="mode-icon">dark_mode</span>
-                <span id="mode-text">Dark Mode</span>
-            </button>
+            <!-- REMOVED: Dark Mode Toggle Button -->
             
             <!-- Login / Register / Logout button (Moved to the left of the profile photo) -->
             <button id="auth-button">Login / Register</button>
@@ -824,10 +781,9 @@
             <div class="content-wrapper">
                 <div class="hero-container">
                     <div class="hero-text">
-                        <!-- Gemini Badge -->
+                        <!-- Gemini Badge (UPDATED to use image) -->
                         <div class="gemini-badge">
-                            <div class="gemini-icon"></div>
-                            Powered by Gemini AI
+                            Powered by <img src="https://kapilatgoogle.github.io/sahayak/assets/gemini.png" alt="Gemini Icon">
                         </div>
                         
                         <!-- Main Headline -->
@@ -851,15 +807,15 @@
                             font-family: 'Noto Sans', sans-serif;
                             font-size: 1.1em;
                             font-weight: 700;
-                        ">
+                        " onclick="window.location.href='#popular'">
                             Go to Simulations →
                         </button>
                     </div>
                     <div class="hero-image">
-                        <!-- Image optimized for Light Mode -->
+                        <!-- Image optimized for Light Mode (Only this one is used) -->
                         <img id="hero-light-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-light.png" alt="Career Sahayak Dashboard Light Mode" >
-                        <!-- Image optimized for Dark Mode -->
-                        <img id="hero-dark-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-dark.png" alt="Career Sahayak Dashboard Dark Mode" >
+                        <!-- Removed: Image optimized for Dark Mode -->
+                        <img id="hero-dark-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-dark.png" alt="Career Sahayak Dashboard Dark Mode" style="display: none;">
                     </div>
                 </div>
             </div>
@@ -891,13 +847,16 @@
                 <h2>Popular Job Simulations</h2>
                 <div class="grid-container">
                     
+                    <!-- EXCHANGED: Google Apprentice is now the first card -->
                     <div class="popular-item">
                         <div class="icon-wrapper">
-                            <span class="material-icons-outlined popular-icon">account_balance_wallet</span>
+                            <span class="material-icons-outlined popular-icon">school</span>
                         </div>
-                        <p class="popular-title">Accounting Executive</p>
+                        <p class="popular-title">Google Apprentice</p>
                     </div>
-
+                    
+                    <!-- EXCHANGED: Accounting Executive is now the last card in the grid -->
+                    
                     <div class="popular-item">
                         <div class="icon-wrapper">
                             <span class="material-icons-outlined popular-icon">campaign</span>
@@ -949,9 +908,9 @@
 
                     <div class="popular-item">
                         <div class="icon-wrapper">
-                            <span class="material-icons-outlined popular-icon">school</span>
+                            <span class="material-icons-outlined popular-icon">account_balance_wallet</span>
                         </div>
-                        <p class="popular-title">Google Apprentice</p>
+                        <p class="popular-title">Accounting Executive</p>
                     </div>
                 </div>
             </div>
@@ -1128,6 +1087,7 @@
                     <div class="zero-image">
                         <!-- Reusing theme-aware hero images -->
                         <img id="zero-light-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-light.png" alt="Career Sahayak Dashboard Light Mode" style="max-width: 100%; height: auto; max-height: 550px;">
+                        <!-- Removed: Dark image is no longer necessary -->
                         <img id="zero-dark-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-dark.png" alt="Career Sahayak Dashboard Dark Mode" style="max-width: 100%; height: auto; max-height: 550px; display: none;">
                     </div>
                 </div>
@@ -1137,25 +1097,23 @@
     </main>
 
     <!-- 3. FOOTER -->
-    <footer id="footer" style="text-align: center; padding: 20px; color: var(--secondary-text-color); transition: border-color 0.3s, color 0.3s;">
+    <footer id="footer" style="text-align: center; padding: 20px; color: var(--secondary-text-color);">
         <!-- Add copyright information, secondary links, or contact info here -->
         <p style="margin: 0; font-size: 0.9em;">&copy; 2025 Career Sahayak Project Build for Apprentice Hacks 2025</p>
         <p style="margin: 0; font-size: 0.9em;">By Bhagyashree Patil (bppatil), Kapil Pidhwani (hikapil), Yash Handuja (handuja), Sakshi Istwal (isakshiumesh) and Vaishnavi Shukla (vaishnavishukl)</p>
     </footer>
 
+    <!-- NEW: Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <span class="material-icons-outlined">arrow_upward</span>
+    </button>
+
     <!-- Add your JavaScript here -->
     <script>
         const body = document.body;
-        const toggleButton = document.getElementById('mode-toggle');
-        const modeIcon = document.getElementById('mode-icon');
-        const modeText = document.getElementById('mode-text');
         
         const authButton = document.getElementById('auth-button');
         const profilePhoto = document.getElementById('profile-photo');
-        
-        // --- Zero Section Image Elements ---
-        const zeroLightImg = document.getElementById('zero-light-img');
-        const zeroDarkImg = document.getElementById('zero-dark-img');
         
         // --- Slideshow Elements ---
         const slideshowWrapper = document.querySelector('.slideshow-wrapper');
@@ -1164,48 +1122,25 @@
         let currentSlide = 0;
         const slideInterval = 5000; // 5 seconds
         let slideshowTimer;
-
-        // --- Dark/Light Mode Logic ---
         
-        function setMode(theme) {
-            if (theme === 'dark') {
-                body.classList.add('dark-mode');
-                modeIcon.textContent = 'light_mode'; 
-                modeText.textContent = 'Light Mode';
-                
-                // Hide light images, show dark images
-                if (zeroLightImg && zeroDarkImg) {
-                    zeroLightImg.style.display = 'none';
-                    zeroDarkImg.style.display = 'block';
-                }
+        // --- Back to Top Button Elements ---
+        const backToTopButton = document.getElementById('back-to-top');
+        const heroSection = document.getElementById('hero');
 
-            } else {
-                body.classList.remove('dark-mode');
-                modeIcon.textContent = 'dark_mode';
-                modeText.textContent = 'Dark Mode';
-                
-                // Show light images, hide dark images
-                if (zeroLightImg && zeroDarkImg) {
-                    zeroLightImg.style.display = 'block';
-                    zeroDarkImg.style.display = 'none';
-                }
-            }
-            localStorage.setItem('theme', theme);
-        }
 
-        // --- Authentication/Login/Logout Logic ---
+        // --- Authentication/Login/Logout Logic (Simplified) ---
 
         function updateAuthUI(isLoggedIn) {
             if (isLoggedIn) {
                 authButton.textContent = 'Logout';
-                // Button appearance for logged-in state (outlined)
+                // Button appearance for logged-in state (outlined black on white)
                 authButton.style.border = '1px solid var(--border-color)'; 
                 authButton.style.backgroundColor = 'transparent';
                 authButton.style.color = 'var(--text-color)';
                 profilePhoto.style.display = 'block';
             } else {
                 authButton.textContent = 'Login / Register';
-                // Button appearance for logged-out state (filled)
+                // Button appearance for logged-out state (filled black)
                 authButton.style.border = '1px solid var(--text-color)'; 
                 authButton.style.backgroundColor = 'var(--filled-button-bg)';
                 authButton.style.color = 'var(--filled-button-text)';
@@ -1220,6 +1155,34 @@
             updateAuthUI(!isLoggedIn);
         });
         
+        // --- Back to Top Logic ---
+        function checkScrollPosition() {
+            if (!heroSection) return;
+            
+            // Get the distance from the top of the viewport to the bottom of the hero section
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            
+            // Show the button if the current scroll position is past the bottom of the hero section
+            if (window.scrollY > heroBottom) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        }
+        
+        // Function to scroll smoothly to the top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Add event listeners for scroll and click
+        window.addEventListener('scroll', checkScrollPosition);
+        backToTopButton.addEventListener('click', scrollToTop);
+
+
         // --- Slideshow Logic ---
         
         function updateSlideshow() {
@@ -1297,38 +1260,25 @@
 
         // --- Initialization on Load ---
 
-        // 1. Initialize Dark/Light Mode
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setMode(savedTheme);
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setMode('dark');
-        } else {
-            setMode('light');
-        }
-
-        // 2. Initialize Auth State
+        // 1. Initialize Auth State
         const savedLoginState = localStorage.getItem('isLoggedIn') === 'true';
         updateAuthUI(savedLoginState);
 
-        // 3. Initialize Slideshow
+        // 2. Initialize Slideshow
         // Use a window.onload listener to ensure all card dimensions are calculated correctly
         window.onload = function() {
             initTestimonialSlideshow();
+            // Initial check for scroll position
+            checkScrollPosition();
         };
 
-        // Event listener for mode toggle button click
-        toggleButton.addEventListener('click', () => {
-            const isDarkMode = body.classList.contains('dark-mode');
-            setMode(isDarkMode ? 'light' : 'dark');
-        });
-        
         // Re-initialize slideshow on resize to fix padding and centering issues
         window.addEventListener('resize', () => {
             // Clear existing timer and re-initialize
             clearInterval(slideshowTimer);
             // Wait for a moment for resize calculation to stabilize
             setTimeout(initTestimonialSlideshow, 100); 
+            checkScrollPosition(); // Re-check scroll position on resize
         });
 
 
