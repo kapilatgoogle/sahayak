@@ -17,14 +17,18 @@
     <!-- Pure CSS Styles -->
     <style>
         body {
-            /* Hardcoded Light Mode Colors */
-            --bg-color: #FFFFFF;
-            --text-color: #000000;
-            --secondary-text-color: #333333; /* Darker grey for body text contrast */
-            --border-color: #E0E0E0; /* Light grey border */
+            /* NEW COLOR PALETTE */
+            --bg-color: #ffffff;
+            --text-color: #221b15; /* Black */
+            --primary-accent: #e1642a; /* Orange-dark for buttons */
+            --secondary-accent: #e88a5d; /* Orange-lite for design */
+            
+            --secondary-text-color: #555555; /* Neutral dark grey for body text contrast/subtle text */
+            --border-color: #e8e8e8; /* Very light grey/border color */
             --subtle-bg-color: #F8F8F8; /* Very light grey for card backgrounds */
-            --filled-button-bg: var(--text-color);
-            --filled-button-text: var(--bg-color);
+            
+            --filled-button-bg: var(--primary-accent); /* Orange-dark */
+            --filled-button-text: var(--bg-color); /* White */
 
             font-family: 'Outfit', sans-serif;
             margin: 0;
@@ -83,6 +87,7 @@
 
         /* 1. NAVIGATION BAR STYLES */
         #navbar {
+            /* Border uses black text color for high contrast */
             border-bottom: 1px solid var(--border-color);
             padding: 15px 40px;
             display: flex;
@@ -110,9 +115,7 @@
             width: auto;
         }
         
-        /* Only dark logo is used now */
-        #logo-light { display: none; }
-        #logo-dark { display: block; }
+        /* Removed #logo-light and #logo-dark styles as only one logo is used now */
 
         /* New Styles for Nav Links */
         .nav-links {
@@ -133,7 +136,7 @@
         }
 
         .nav-link:hover {
-            color: var(--secondary-text-color); 
+            color: var(--primary-accent); /* Orange hover color */
         }
 
         .nav-actions {
@@ -150,7 +153,7 @@
             min-width: 35px; 
             min-height: 35px;
             border-radius: 50%;
-            background-color: var(--secondary-text-color); 
+            background-color: var(--secondary-accent); /* Lite Orange background */
             border: 1px solid var(--border-color);
             cursor: pointer;
             display: none;
@@ -158,9 +161,10 @@
 
         /* AUTH BUTTON STYLES (Always Filled/Inverse Color in Light Mode) */
         #auth-button {
+            /* Filled with Orange-dark, text is White */
             background-color: var(--filled-button-bg); 
             color: var(--filled-button-text); 
-            border: 1px solid var(--text-color); 
+            border: 1px solid var(--primary-accent); 
             padding: 8px 12px;
             border-radius: 6px;
             cursor: pointer;
@@ -179,18 +183,12 @@
             transform: scale(0.98);
         }
 
-        /* Removed #mode-toggle styles */
-
-        .material-icons-outlined {
-            font-size: 20px; 
-        }
-        
         /* NEW: Back to Top Button Styles */
         #back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: var(--text-color); /* Black background */
+            background-color: var(--primary-accent); /* Orange-dark background */
             color: var(--bg-color); /* White icon */
             border: none;
             border-radius: 50%;
@@ -250,8 +248,9 @@
             margin-bottom: 10px;
             padding: 5px 12px;
             border-radius: 15px;
-            border: 1px solid var(--border-color);
-            color: var(--secondary-text-color);
+            /* Use Secondary Accent for subtle design element */
+            border: 1px solid var(--secondary-accent); 
+            color: var(--secondary-accent); /* Lite Orange text */
         }
         
         /* New Gemini Icon Image Style */
@@ -259,8 +258,6 @@
             height: 14px;
             vertical-align: middle;
         }
-        
-        /* Removed old .gemini-icon placeholder style */
 
         .hero-image {
             flex: 1;
@@ -276,8 +273,8 @@
         }
 
         /* Hero Image Visibility Control (Simplified to use only light image) */
-        #hero-light-img { display: block; }
-        #hero-dark-img { display: none; }
+        /* #hero-light-img { display: block; }
+        #hero-dark-img { display: none; } */
 
         #hero-cta {
             margin-top: 30px;
@@ -311,7 +308,7 @@
             font-size: 3em; 
             font-weight: 700;
             margin-bottom: 5px; 
-            color: var(--text-color);
+            color: var(--primary-accent); /* Orange-dark for high impact numbers */
             text-align: center; 
             line-height: 1;
         }
@@ -340,9 +337,6 @@
             transform: translateY(-2px);
         }
         
-        /* Simplified hover state for permanent light mode */
-        /* removed body.dark-mode hover styles */
-
         .icon-wrapper {
             width: 50px;
             height: 50px;
@@ -353,12 +347,13 @@
             align-items: center;
             justify-content: center;
             background-color: var(--subtle-bg-color); 
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--secondary-accent); /* Orange-lite border */
             transition: all 0.3s;
         }
         
         .popular-icon {
             font-size: 24px;
+            color: var(--primary-accent); /* Orange-dark icon color */
         }
 
         .popular-title {
@@ -430,6 +425,7 @@
 
         .feature-icon {
             font-size: 28px;
+            color: var(--primary-accent); /* Orange-dark icon color */
             min-width: 28px; 
         }
 
@@ -453,8 +449,8 @@
         }
         
         #testimonials .sub-header {
-            text-align: center;
             color: var(--secondary-text-color);
+            text-align: center;
             margin-bottom: 40px;
         }
 
@@ -527,10 +523,11 @@
             font-size: 5em;
             font-family: 'Noto Sans', sans-serif;
             position: absolute;
-            color: var(--border-color);
+            /* Use Lite Orange for subtle design element */
+            color: var(--secondary-accent);
             line-height: 1;
             z-index: 1;
-            opacity: 0.5;
+            opacity: 0.2; /* Reduce opacity for subtlety */
         }
 
         .testimonial-card::before {
@@ -577,7 +574,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: var(--border-color);
+            /* Use Lite Orange for subtle design element */
+            background-color: var(--secondary-accent);
             min-width: 50px;
             min-height: 50px;
         }
@@ -636,6 +634,70 @@
             justify-content: flex-end;
         }
 
+        /* NEW: Footer Styles */
+        #footer {
+            padding: 60px 40px 30px 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-grid {
+            /* UPDATED: Change to 2fr 1fr for a two-column layout */
+            display: grid;
+            grid-template-columns: 2fr 1fr; 
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto 40px auto;
+        }
+
+        .footer-logo-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo-col .logo {
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo-col p {
+            font-size: 0.9em;
+            margin: 0;
+            max-width: 80%;
+        }
+
+        .footer-column h4 {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: var(--text-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .footer-link-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-link-list a {
+            text-decoration: none;
+            color: var(--secondary-text-color);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95em;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .footer-link-list a:hover {
+            color: var(--primary-accent);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
 
         /* Responsive adjustments */
         @media (max-width: 900px) {
@@ -738,6 +800,27 @@
                  margin-left: -20px; 
                  width: calc(100% + 40px);
             }
+            
+            /* Footer Responsive Adjustments */
+            .footer-grid {
+                grid-template-columns: 1fr; /* Stack columns vertically */
+            }
+            .footer-logo-col {
+                text-align: center;
+                align-items: center;
+            }
+            .footer-column {
+                text-align: center;
+            }
+            .footer-link-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .footer-link-list a {
+                margin-bottom: 0;
+            }
         }
 
     </style>
@@ -747,10 +830,8 @@
     <!-- 1. NAVIGATION BAR -->
     <header id="navbar">
         <a href="#" class="logo">
-            <!-- Logo for Light Mode (shown by default) -->
-            <img id="logo-dark" src="https://kapilatgoogle.github.io/sahayak/assets/logo-dark.png" alt="SAHAYAK Logo Dark" class="logo-img">
-            <!-- Logo for Dark Mode (hidden by default) -->
-            <img id="logo-light" src="https://kapilatgoogle.github.io/sahayak/assets/logo-light.png" alt="SAHAYAK Logo Light" class="logo-img">
+            <!-- New single logo image (UPDATED) -->
+            <img id="logo-single" src="https://kapilatgoogle.github.io/sahayak/assets/logo.png" alt="SAHAYAK Logo" class="logo-img">
             SAHAYAK
         </a>
         
@@ -762,8 +843,6 @@
                 <a href="#hero" class="nav-link">Dashboard</a>
                 <a href="#footer" class="nav-link">About</a>
             </nav>
-            
-            <!-- REMOVED: Dark Mode Toggle Button -->
             
             <!-- Login / Register / Logout button (Moved to the left of the profile photo) -->
             <button id="auth-button">Login / Register</button>
@@ -781,7 +860,7 @@
             <div class="content-wrapper">
                 <div class="hero-container">
                     <div class="hero-text">
-                        <!-- Gemini Badge (UPDATED to use image) -->
+                        <!-- Gemini Badge -->
                         <div class="gemini-badge">
                             Powered by <img src="https://kapilatgoogle.github.io/sahayak/assets/gemini.png" alt="Gemini Icon">
                         </div>
@@ -794,11 +873,11 @@
                             Career Sahayak provides realistic, AI-driven job simulations that give you a hands-on feel for the role, removing guesswork from your next career move.
                         </p>
                         
-                        <!-- Call to Action (UPDATED TEXT) -->
+                        <!-- Call to Action -->
                         <button id="hero-cta" class="filled-button" style="
                             background-color: var(--filled-button-bg); 
                             color: var(--filled-button-text); 
-                            border: 1px solid var(--text-color); 
+                            border: 1px solid var(--primary-accent); 
                             padding: 15px 30px;
                             border-radius: 8px;
                             cursor: pointer;
@@ -812,10 +891,8 @@
                         </button>
                     </div>
                     <div class="hero-image">
-                        <!-- Image optimized for Light Mode (Only this one is used) -->
-                        <img id="hero-light-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-light.png" alt="Career Sahayak Dashboard Light Mode" >
-                        <!-- Removed: Image optimized for Dark Mode -->
-                        <img id="hero-dark-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-dark.png" alt="Career Sahayak Dashboard Dark Mode" style="display: none;">
+                        <!-- Single Hero Image -->
+                        <img id="hero-image-single" src="https://kapilatgoogle.github.io/sahayak/assets/hero.png" alt="Career Sahayak Dashboard Screenshot" >
                     </div>
                 </div>
             </div>
@@ -1043,6 +1120,7 @@
                                         <p>Samir Khan</p>
                                         <small>Recent Graduate</small>
                                     </div>
+                                
                                 </div>
                             </div>
                         </div>
@@ -1068,7 +1146,7 @@
                         <button id="zero-cta" class="filled-button" style="
                             background-color: var(--filled-button-bg); 
                             color: var(--filled-button-text); 
-                            border: 1px solid var(--text-color); 
+                            border: 1px solid var(--primary-accent); 
                             padding: 15px 30px;
                             border-radius: 8px;
                             cursor: pointer;
@@ -1083,12 +1161,10 @@
                         </button>
                     </div>
                     
-                    <!-- Right Column: Image -->
+                    <!-- Right Column: Image (UPDATED) -->
                     <div class="zero-image">
-                        <!-- Reusing theme-aware hero images -->
-                        <img id="zero-light-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-light.png" alt="Career Sahayak Dashboard Light Mode" style="max-width: 100%; height: auto; max-height: 550px;">
-                        <!-- Removed: Dark image is no longer necessary -->
-                        <img id="zero-dark-img" src="https://kapilatgoogle.github.io/sahayak/assets/hero-dark.png" alt="Career Sahayak Dashboard Dark Mode" style="max-width: 100%; height: auto; max-height: 550px; display: none;">
+                        <!-- Reusing the new single hero image -->
+                        <img id="zero-image-single" src="https://kapilatgoogle.github.io/sahayak/assets/zero.png" alt="Career Sahayak Dashboard Screenshot" style="max-width: 100%; height: auto; max-height: 550px;">
                     </div>
                 </div>
             </div>
@@ -1097,10 +1173,41 @@
     </main>
 
     <!-- 3. FOOTER -->
-    <footer id="footer" style="text-align: center; padding: 20px; color: var(--secondary-text-color);">
-        <!-- Add copyright information, secondary links, or contact info here -->
-        <p style="margin: 0; font-size: 0.9em;">&copy; 2025 Career Sahayak Project Build for Apprentice Hacks 2025</p>
-        <p style="margin: 0; font-size: 0.9em;">By Bhagyashree Patil (bppatil), Kapil Pidhwani (hikapil), Yash Handuja (handuja), Sakshi Istwal (isakshiumesh) and Vaishnavi Shukla (vaishnavishukl)</p>
+    <footer id="footer">
+        <div class="content-wrapper">
+            <div class="footer-grid">
+                
+                <!-- Column 1: Logo & Mission -->
+                <div class="footer-logo-col">
+                    <a href="#" class="logo">
+                        <img id="logo-single" src="https://kapilatgoogle.github.io/sahayak/assets/logo.png" alt="SAHAYAK Logo" class="logo-img">
+                        SAHAYAK
+                    </a>
+                    <p>
+                        Empowering job seekers with hands-on, AI-driven career simulations to build confidence and ensure a perfect role fit. Powered by Gemini.
+                    </p>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#popular">Simulations</a></li>
+                        <li><a href="#demo">Demo</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Legal & Resources - REMOVED -->
+            </div>
+
+            <!-- Copyright and Project Details -->
+            <div class="footer-copyright">
+                <p style="margin: 0; font-size: 0.85em;">&copy; 2025 Career Sahayak Project. All rights reserved.</p>
+                <p style="margin: 0; font-size: 0.85em; margin-top: 5px;">Built for Apprentice Hacks 2025 by Bhagyashree Patil, Kapil Pidhwani, Yash Handuja, Sakshi Istwal, and Vaishnavi Shukla.</p>
+            </div>
+        </div>
     </footer>
 
     <!-- NEW: Back to Top Button -->
@@ -1140,8 +1247,8 @@
                 profilePhoto.style.display = 'block';
             } else {
                 authButton.textContent = 'Login / Register';
-                // Button appearance for logged-out state (filled black)
-                authButton.style.border = '1px solid var(--text-color)'; 
+                // Button appearance for logged-out state (filled orange)
+                authButton.style.border = '1px solid var(--primary-accent)'; 
                 authButton.style.backgroundColor = 'var(--filled-button-bg)';
                 authButton.style.color = 'var(--filled-button-text)';
                 profilePhoto.style.display = 'none';
